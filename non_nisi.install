@@ -1,0 +1,41 @@
+<?php
+
+function non_nisi_uninstall(){
+    drupal_uninstall_schema('non_nisi');
+  
+}
+  
+function non_nisi_enable() {
+    if (db_table_exists('non_nisi') == FALSE) {
+		drupal_install_schema('non_nisi');
+    }
+
+
+}  
+
+function non_nisi_disable() {
+    if (db_table_exists('non_nisi') == TRUE) {
+		drupal_uninstall_schema('non_nisi');
+		db_query('DROP TABLE {non_nisi}');
+    }
+   
+}
+
+function non_nisi_schema() {
+    $schema = array();
+    $schema['non_nisi'] = array(
+        'description' => 'non_nisi',
+        'fields' => array(
+            'id' => array(
+            'description' => 'id',
+            'type' => 'serial',
+            'unsigned' => true,
+            'not null' => true
+            ),
+        ),
+        'primary key' => array('id')
+    );
+  
+    
+    return $schema;
+}

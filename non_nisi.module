@@ -1,0 +1,29 @@
+<?php 
+
+function non_nisi_init(){
+    drupal_add_css(drupal_get_path('module','non_nisi').'/css/non_nisi_style.css');
+    drupal_add_js(drupal_get_path('module','non_nisi').'/js/non_nisi_jfunctions.js');
+}
+function non_nisi_menu(){
+	$items = array();
+	$items['custom/non_nisi/index'] = array(
+		'title'            => t('Custom module'),
+		'page callback'    => 'non_nisi_index_action',
+		'access arguments' => array('access content'),
+		'type'             => MENU_LOCAL_TASK,
+	);
+
+	return $items;
+}
+
+function non_nisi_theme(){
+	 return array(
+		'non_nisi_index' => array(
+			'template' => 'non_nisi_index'
+		)
+	);
+}
+function non_nisi_index_action(){
+	 return theme('non_nisi_index', array());
+}
+
